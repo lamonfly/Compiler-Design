@@ -10,4 +10,4 @@ Then we create tables for classes, functions, variables and etc.
 
 Now that all the information from the input text file code has been processed.
 
-We transfer the data into a risc architecture, moon code to be tested.
+We transfer the data into a risc architecture, moon code, to be tested.
