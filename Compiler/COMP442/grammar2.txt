@@ -1,0 +1,95 @@
+prog -> zmClassDecl zmFuncDef 'main' funcBody ';'
+classDecl -> 'class' 'id' zoIDL '{' zmVarFunc '}' ';'
+zmClassDecl -> classDecl zmClassDecl | EPSILON
+zoIDL -> ':' 'id' zoIDLL | EPSILON
+zoIDLL -> ',' 'id' zoIDLL | EPSILON
+zmVarFunc -> type 'id' zmVarFuncSub
+zmVarFuncSub -> zmAS ';' zmVarFunc | '(' fParams ')' ';' zmFuncDecl | EPSILON
+funcDecl -> type 'id' '(' fParams ')' ';'
+zmFuncDecl -> funcDecl zmFuncDecl | EPSILON
+funcHead -> type 'id' zoIDS '(' fParams ')'
+zoIDS -> '::' 'id' | EPSILON
+funcDef -> funcHead funcBody ';'
+zmFuncDef -> funcDef zmFuncDef | EPSILON
+funcBody -> '{' zmVarState '}'
+varDecl -> type 'id' zmAS ';'
+statement -> assignStat ';'
+ | statementSub
+statementSub -> 'if' '(' expr ')' 'then' statBlock 'else' statBlock ';'
+ | 'for' '(' type 'id' assignOp expr ';' relExpr ';' assignStat ')' statBlock ';'
+ | 'read' '(' variable ')' ';'
+ | 'write' '(' expr ')' ';'
+ | 'return' '(' expr ')' ';'
+zmStatement -> statement zmStatement | EPSILON
+assignStat -> variable assignOp expr
+statBlock -> '{' zmStatement '}' | statement | EPSILON
+expr -> arithExpr zoExprSub
+exprSub -> relOp arithExpr
+zoExprSub -> exprSub | EPSILON
+relExpr -> arithExpr relOp arithExpr
+arithExpr -> term zmArithExprSub
+arithExprSub -> addOp term
+zmArithExprSub -> arithExprSub zmArithExprSub | EPSILON
+sign -> '+' | '-'
+term -> factor zmTermSub
+termSub -> multOp factor
+zmTermSub -> termSub zmTermSub | EPSILON
+factor -> varCall
+ | '10'
+ | '1.1'
+ | '(' arithExpr ')'
+ | '!' factor
+ | sign factor
+factorSub ->varCall
+ | '1.1'
+ | '(' arithExpr ')'
+ | '!' factor
+ | sign factor 
+variable -> 'id' idnestIdSub
+functionCall -> '(' aParams ')'
+varCall -> 'id' idnestId0Sub
+idnest -> 'id' idnestSub
+idnestSub -> zmIndice '.' | 'id' '(' aParams ')' '.'
+zmIdnest -> idnest zmIdnest | EPSILON
+idnestIdSub -> idnestIdSub0 | EPSILON
+idnestIdSub0 -> '.' variable | 'id' '(' aParams ')' '.' variable | '[' idnestIdSub1
+idnestIdSub1 -> arithExpr ']' zmIndice idnestIdSub2
+idnestIdSub2 -> '.' variable | EPSILON
+idnestId0Sub -> idnestId0Sub0 | EPSILON
+idnestId0Sub0 -> '.' varCall | 'id' '(' aParams ')' '.' varCall | '[' idnestId0Sub1 | functionCall
+idnestId0Sub1 -> arithExpr ']' zmIndice idnestId0Sub2
+idnestId0Sub2 -> '.' varCall | EPSILON
+indice -> '[' arithExpr ']'
+zmIndice -> indice zmIndice | EPSILON
+arraySize -> '[' '1' ']'
+zmAS -> arraySize zmAS | EPSILON
+type -> 'integer' | 'float' | 'id'
+fParams -> type 'id' zmAS zmFParamsTail | EPSILON
+aParams -> expr zmAParamsTail | EPSILON
+fParamsTail -> ',' type 'id' zmAS
+zmFParamsTail -> fParamsTail zmFParamsTail | EPSILON
+aParamsTail -> ',' expr
+zmAParamsTail -> aParamsTail zmAParamsTail | EPSILON
+assignOp -> '='
+relOp -> '==' | '<>' | '<' | '>' | '<=' | '>='
+addOp -> '+' | '-' | '||'
+multOp -> '*' | '/' | '&&'
+zmVarState -> 'id' varState0
+ | 'integer' 'id' zmAS ';' zmVarState
+ | 'float' 'id' zmAS ';' zmVarState
+ | statementSub zmStatement
+varState0 -> 'id' varState1
+ | zmIndice '.' assignStat ';' zmStatement
+ | assignOp expr ';' zmStatement
+varState1 -> '[' varState2
+ | ';' zmVarState
+ | assignOp expr ';' zmStatement
+ | '(' aParams ')' '.' assignStat ';' zmStatement
+varState2 -> '10' varState3
+ | factorSub zmTermSub zmArithExprSub ']' zmIndice assignOp expr ';' zmStatement
+varState3 -> ']' varState4
+ | arithExprSub zmArithExprSub ']' zmIndice assignOp expr ';' zmStatement
+ | termSub zmTermSub zmArithExprSub ']' zmIndice assignOp expr ';' zmStatement
+varState4 -> '[' varState2
+ | ';' zmVarState
+ | assignOp expr ';' zmStatement

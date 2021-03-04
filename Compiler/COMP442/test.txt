@@ -1,0 +1,46 @@
+class BaseClass{
+	integer base1;
+	integer base2[5][5];
+};
+
+class InhClass:BaseClass{
+	integer base3;
+};
+
+class hasObjects{
+	InhClass ic1;
+	BaseClass bc1[10];
+};
+
+integer testFunc(integer test){
+	integer idk;
+	idk = 50;
+	return(idk);
+};
+
+main {
+	integer someInt;
+	hasObjects ho;
+	ho.ic1.base1 = 20;
+
+/* This loop
+will
+get the answer */
+
+	for (int i = 10; i <= 20; i=1+i){
+		if (ho.ic1.base1 == 19) then{
+			// do nothing
+		}
+		else {
+			ho.ic1.base3 = ho.ic1.base3 + i;
+		};
+	};
+	
+	read(someInt);
+	ho.bc1[2].base2[4][3] = someInt;
+
+	someInt = ((someInt * 20) + 5 * 40 - 1) / 2;
+
+	write(ho.ic1.base1 + ho.bc1[2].base2[4][3]);
+	write(someInt);
+};

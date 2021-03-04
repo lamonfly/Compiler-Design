@@ -1,0 +1,46 @@
++-+-+-+
+BaseClass                     
+
+base1                    variable                 integer                  
+base2                    variable                 integer [ 5 ] [ 5 ]      
+
++-+-+-+
+InhClass:BaseClass            
+
+base3                    variable                 integer                  
+base1                    variable                 integer                  
+base2                    variable                 integer [ 5 ] [ 5 ]      
+
++-+-+-+
+hasObjects                    
+
+ic1                      variable                 InhClass                 
+bc1                      variable                 BaseClass [ 10 ]         
+
++-+-+-+
+testFunc                      
+
+idk                      variable                 integer                  
+test                     variable                 integer                  
+
++-+-+-+
+for->001D4A70                 
+
+i                        variable                 int                      
+
++-+-+-+
+main                          
+
+someInt                  variable                 integer                  
+ho                       variable                 hasObjects               
+for->001D4A70            loop                                              
+
++-+-+-+
+Global                        
+
+BaseClass                class                                             
+InhClass:BaseClass       class                                             
+hasObjects               class                                             
+testFunc                 function                 integer : integer        
+main                     function                                          
+

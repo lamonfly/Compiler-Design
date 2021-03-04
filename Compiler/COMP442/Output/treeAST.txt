@@ -1,0 +1,197 @@
+prog -> classDecl classDecl classDecl funcDef main funcBody ; 
+classDecl -> class BaseClass { varDecl varDecl } ; 
+varDecl -> type base1 ; 
+type -> integer 
+varDecl -> type base2 arraySize arraySize ; 
+type -> integer 
+arraySize -> [ 5 ] 
+arraySize -> [ 5 ] 
+classDecl -> class InhClass : BaseClass { varDecl } ; 
+varDecl -> type base3 ; 
+type -> integer 
+classDecl -> class hasObjects { varDecl varDecl } ; 
+varDecl -> type ic1 ; 
+type -> InhClass 
+varDecl -> type bc1 arraySize ; 
+type -> BaseClass 
+arraySize -> [ 10 ] 
+funcDef -> funcHead funcBody ; 
+funcHead -> type testFunc ( fParams ) 
+type -> integer 
+fParams -> type test 
+type -> integer 
+funcBody -> { varDecl statement statement } 
+varDecl -> type idk ; 
+type -> integer 
+statement -> assignStat ; 
+assignStat -> variable assignOp expr 
+variable -> idk 
+assignOp -> = 
+expr -> arithExpr 
+arithExpr -> term 
+term -> factor 
+factor -> 50 
+statement -> return ( expr ) ; 
+expr -> arithExpr 
+arithExpr -> term 
+term -> factor 
+factor -> variable 
+variable -> idk 
+funcBody -> { varDecl varDecl statement statement statement statement statement statement statement } 
+varDecl -> type someInt ; 
+type -> integer 
+varDecl -> type ho ; 
+type -> hasObjects 
+statement -> assignStat ; 
+assignStat -> variable assignOp expr 
+variable -> idnest idnest base1 
+idnest -> ho . 
+idnest -> ic1 . 
+assignOp -> = 
+expr -> arithExpr 
+arithExpr -> term 
+term -> factor 
+factor -> 20 
+statement -> for ( type i assignOp expr ; relExpr ; assignStat ) statBlock ; 
+type -> int 
+assignOp -> = 
+expr -> arithExpr 
+arithExpr -> term 
+term -> factor 
+factor -> 10 
+relExpr -> arithExpr relOp arithExpr 
+arithExpr -> term 
+term -> factor 
+factor -> variable 
+variable -> i 
+relOp -> <= 
+arithExpr -> term 
+term -> factor 
+factor -> 20 
+assignStat -> variable assignOp expr 
+variable -> i 
+assignOp -> = 
+expr -> arithExpr 
+arithExpr -> term addOp term 
+term -> factor 
+factor -> 1 
+addOp -> + 
+term -> factor 
+factor -> variable 
+variable -> i 
+statBlock -> { statement } 
+statement -> if ( expr ) then statBlock else statBlock ; 
+expr -> arithExpr relOp arithExpr 
+arithExpr -> term 
+term -> factor 
+factor -> variable 
+variable -> idnest idnest base1 
+idnest -> ho . 
+idnest -> ic1 . 
+relOp -> == 
+arithExpr -> term 
+term -> factor 
+factor -> 19 
+statBlock -> { } 
+statBlock -> { statement } 
+statement -> assignStat ; 
+assignStat -> variable assignOp expr 
+variable -> idnest idnest base3 
+idnest -> ho . 
+idnest -> ic1 . 
+assignOp -> = 
+expr -> arithExpr 
+arithExpr -> term addOp term 
+term -> factor 
+factor -> variable 
+variable -> idnest idnest base3 
+idnest -> ho . 
+idnest -> ic1 . 
+addOp -> + 
+term -> factor 
+factor -> variable 
+variable -> i 
+statement -> read ( variable ) ; 
+variable -> someInt 
+statement -> assignStat ; 
+assignStat -> variable assignOp expr 
+variable -> idnest idnest base2 indice indice 
+idnest -> ho . 
+idnest -> bc1 indice . 
+indice -> [ arithExpr ] 
+arithExpr -> term 
+term -> factor 
+factor -> 2 
+indice -> [ arithExpr ] 
+arithExpr -> term 
+term -> factor 
+factor -> 4 
+indice -> [ arithExpr ] 
+arithExpr -> term 
+term -> factor 
+factor -> 3 
+assignOp -> = 
+expr -> arithExpr 
+arithExpr -> term 
+term -> factor 
+factor -> variable 
+variable -> someInt 
+statement -> assignStat ; 
+assignStat -> variable assignOp expr 
+variable -> someInt 
+assignOp -> = 
+expr -> arithExpr 
+arithExpr -> term 
+term -> factor multOp factor 
+factor -> ( arithExpr ) 
+arithExpr -> term addOp term addOp term 
+term -> factor 
+factor -> ( arithExpr ) 
+arithExpr -> term 
+term -> factor multOp factor 
+factor -> variable 
+variable -> someInt 
+multOp -> * 
+factor -> 20 
+addOp -> + 
+term -> factor multOp factor 
+factor -> 5 
+multOp -> * 
+factor -> 40 
+addOp -> - 
+term -> factor 
+factor -> 1 
+multOp -> / 
+factor -> 2 
+statement -> write ( expr ) ; 
+expr -> arithExpr 
+arithExpr -> term addOp term 
+term -> factor 
+factor -> variable 
+variable -> idnest idnest base1 
+idnest -> ho . 
+idnest -> ic1 . 
+addOp -> + 
+term -> factor 
+factor -> variable 
+variable -> idnest idnest base2 indice indice 
+idnest -> ho . 
+idnest -> bc1 indice . 
+indice -> [ arithExpr ] 
+arithExpr -> term 
+term -> factor 
+factor -> 2 
+indice -> [ arithExpr ] 
+arithExpr -> term 
+term -> factor 
+factor -> 4 
+indice -> [ arithExpr ] 
+arithExpr -> term 
+term -> factor 
+factor -> 3 
+statement -> write ( expr ) ; 
+expr -> arithExpr 
+arithExpr -> term 
+term -> factor 
+factor -> variable 
+variable -> someInt 
