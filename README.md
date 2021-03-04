@@ -4,7 +4,7 @@ This compiler reads from a input text file using the console and output code in 
 We first read the file in order to tokenize every keyword of a set lingo. We use the dfa shown below to classify every token.
 ![alt dfa](https://github.com/lamonfly/Compiler-Design/blob/master/dfa.png?raw=true)
 
-We then make sense of the array of token into grammar using either grammar text file.
+We then make sense of the array of token into grammar using a grammar text file.
 
 Then we create tables for classes, functions, variables and etc.
 
